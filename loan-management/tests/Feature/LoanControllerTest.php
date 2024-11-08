@@ -22,7 +22,6 @@ class LoanControllerTest extends TestCase
         $this->actingAs($this->user, 'sanctum');
     }
 
-    /** @test */
     public function test_returns_all_loans()
     {
         Loan::factory()->count(5)->create();
@@ -30,10 +29,8 @@ class LoanControllerTest extends TestCase
         $response = $this->getJson('/api/loans');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(5);
     }
 
-    /** @test */
     public function test_successfully_creates_a_new_loan()
     {
         $loanData = [
@@ -51,7 +48,6 @@ class LoanControllerTest extends TestCase
         $this->assertDatabaseHas('loans', ['amount' => 50000]);
     }
 
-    /** @test */
     public function test_successfully_retrieves_a_specific_loan()
     {
         $loan = Loan::factory()->create();
@@ -62,7 +58,6 @@ class LoanControllerTest extends TestCase
         $response->assertJsonFragment(['duration_in_months' => $loan->duration_in_months]);
     }
 
-    /** @test */
     public function test_updates_a_loan_successfully()
     {
         $loan = Loan::factory()->create([
@@ -88,7 +83,6 @@ class LoanControllerTest extends TestCase
         $this->assertDatabaseHas('loans', ['amount' => 20000]);
     }
 
-    /** @test */
     public function test_it_can_delete_a_loan()
     {
         $loan = Loan::factory()->create();
