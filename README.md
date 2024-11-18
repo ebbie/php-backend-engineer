@@ -182,5 +182,40 @@ For routes that require authentication, use **Bearer Token** authorization in Po
 - **Authorization**: Bearer Token
 - **Expected Response**: Success message confirming logout.
 
+### 7.9. Repayment (Authenticated)
+- **Method**: POST
+- **URL**: {{base_url}}/api/repayment
+- **Authorization**: Bearer Token
+-- **Body**: JSON
+```json
+{
+  "amount": 5000,
+  "loan_id": 1
+}
+```
+- **Expected Responses**:
+- **201 Created**: When a repayment is logged
+```json
+ {
+    "id": 1,
+    "loan_id": 5,
+    "amount": 200,
+    "created_at": "2024-11-16T10:00:00Z",
+    "updated_at": "2024-11-16T10:00:00Z"
+}
+```
+- **404 Not Found**: If the loan_id does not exist or is not associated with the authenticated borrower
+```json
+{
+    "error": "Loan not found or unauthorized."
+}
+```
+- **400 Bad Request**: If the repayment amount exceeds the loan balance
+```json
+{
+    "error": "Repayment amount exceeds the remaining balance."
+}
+```
+  
 ### Notes
 - Replace ```{{base_url}}``` with the actual URL of your application.
