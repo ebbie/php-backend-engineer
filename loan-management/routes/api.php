@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\RepaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -21,6 +22,7 @@ Route::middleware([
         Route::put('/loan/edit/{id}', [LoanController::class, 'update']);
         Route::delete('/loan/{id}', [LoanController::class, 'destroy']);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/repayment', [RepaymentController::class, 'store']);
     });
 
 });
